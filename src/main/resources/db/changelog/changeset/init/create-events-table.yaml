@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-users-table
+      author: Batman
+      comment: "Создание таблицы с мероприятиями"
+      changes:
+        - createTable:
+            tableName: events
+            remarks: "Таблица с мероприятиями"
+            columns:
+              - column:
+                  remarks: "Id мероприятия"
+                  name: id
+                  type: SERIAL
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  remarks: "Название мероприятия"
+                  name: title
+                  type: VARCHAR(25)
+                  constraints:
+                    nullable: false
+              - column:
+                  remarks: "Место проведения"
+                  name: place
+                  type: VARCHAR(127)
+                  constraints:
+                    nullable: true
+              - column:
+                  remarks: "Дата начала мероприятия"
+                  name: started_at
+                  type: TIMESTAMP
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  remarks: "Дата конца мероприятия"
+                  name: ended_at
+                  type: TIMESTAMP
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
