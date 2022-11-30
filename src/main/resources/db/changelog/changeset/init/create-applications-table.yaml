@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-tasks-table
+      author: Batman
+      comment: "Создание таблицы с заявками пользователей на мероприятия"
+      changes:
+        - createTable:
+            tableName: applications
+            remarks: "Таблица с заявками пользователей на мероприятия"
+            columns:
+              - column:
+                  remarks: "Id заявки"
+                  name: id
+                  type: SERIAL
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  remarks: "Id мероприятия"
+                  name: event_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    foreignKeyName: event_id
+                    references: events(id)
+              - column:
+                  remarks: "Id юзера"
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    foreignKeyName: user_id
+                    references: users(id)
+              - column:
+                  remarks: "Статус заявки"
+                  name: status
+                  type: VARCHAR(10)
+                  constraints:
+                    nullable: false
