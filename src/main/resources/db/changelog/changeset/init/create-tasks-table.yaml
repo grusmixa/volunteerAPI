@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-tasks-table
+      author: Batman
+      comment: "Создание таблицы с задачами для мероприятий"
+      changes:
+        - createTable:
+            tableName: events
+            remarks: "Таблица с задачами для мероприятий"
+            columns:
+              - column:
+                  remarks: "Id задачи"
+                  name: id
+                  type: SERIAL
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  remarks: "Название задачи"
+                  name: title
+                  type: VARCHAR(15)
+                  constraints:
+                    nullable: false
+              - column:
+                  remarks: "Описание задачи"
+                  name: description
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  remarks: "Пожелания для волонтеров"
+                  name: wish
+                  type: VARCHAR(70)
+                  constraints:
+                    nullable: false
+              - column:
+                  remarks: "Id мероприятия"
+                  name: event_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    foreignKeyName: event_id
+                    references: events(id)
