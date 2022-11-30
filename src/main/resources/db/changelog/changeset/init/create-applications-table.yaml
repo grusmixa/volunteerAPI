@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: create-tasks-table
+      id: create-applications-table
       author: Batman
       comment: "Создание таблицы с заявками пользователей на мероприятия"
       changes:

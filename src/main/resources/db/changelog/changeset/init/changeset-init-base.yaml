@@ -5,3 +5,5 @@ databaseChangeLog:
       file: db/changelog/changeset/init/create-events-table.yaml
   - include:
       file: db/changelog/changeset/init/create-tasks-table.yaml
+  - include:
+      file: db/changelog/changeset/init/create-applications-table.yaml

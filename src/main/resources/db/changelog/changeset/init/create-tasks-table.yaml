@@ -5,7 +5,7 @@ databaseChangeLog:
       comment: "Создание таблицы с задачами для мероприятий"
       changes:
         - createTable:
-            tableName: events
+            tableName: tasks
             remarks: "Таблица с задачами для мероприятий"
             columns:
               - column:
