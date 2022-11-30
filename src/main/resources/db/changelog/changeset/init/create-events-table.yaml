@@ -23,6 +23,12 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  remarks: "Количество волонтеров"
+                  name: volunteer_amount
+                  type: Integer
+                  constraints:
+                    nullable: false
+              - column:
                   remarks: "Место проведения"
                   name: place
                   type: VARCHAR(127)
