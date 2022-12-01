@@ -2,8 +2,7 @@ package ru.ssau.volunteerapi.model.entitie;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -14,4 +13,17 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "applications")
 public class Application {
+    @Id
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "event_id")
+    private Event eventId;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User userId;
+
+    @Column(name = "status")
+    private ApplicationStatus status;
 }
