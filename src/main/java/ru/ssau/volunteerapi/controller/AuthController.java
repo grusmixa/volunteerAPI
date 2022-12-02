@@ -20,7 +20,7 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<LoginResponse> logout(@CookieValue(name = ACCESS_TOKEN) String tokenCookieValue) {
+    public ResponseEntity<LoginResponse> logout(@CookieValue(name = "ACCESS_TOKEN") String tokenCookieValue) {
         return ResponseEntity.ok(userService.logout(tokenCookieValue));
     }
 

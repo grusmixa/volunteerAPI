@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.ssau.volunteerapi.model.dto.patch.UserPatch;
+import ru.ssau.volunteerapi.model.dto.request.LoginRequest;
 import ru.ssau.volunteerapi.model.dto.request.UserRequest;
 import ru.ssau.volunteerapi.model.dto.response.LoginResponse;
 import ru.ssau.volunteerapi.model.dto.response.UserResponse;
@@ -27,6 +28,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse patchUser(UserPatch userPatch) {
+        return null;
+    }
+
+    @Override
+    public LoginResponse logout(String tokenCookieValue) {
+        return null;
+    }
+
+    @Override
+    public LoginResponse login(LoginRequest loginRequest) {
         return null;
     }
 }
