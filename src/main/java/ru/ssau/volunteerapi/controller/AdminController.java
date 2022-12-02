@@ -15,12 +15,12 @@ import java.util.UUID;
 public class AdminController {
     private final EventService eventService;
 
-    @PostMapping("/createEvent")
+    @PostMapping
     public ResponseEntity<EventGeneral> createEvent(@RequestBody EventGeneral eventGeneral) {
         return ResponseEntity.ok(eventService.createEvent(eventGeneral));
     }
 
-    @DeleteMapping("/deleteEvent/{event_id}")
+    @DeleteMapping("/{event_id}")
     public ResponseEntity<Void> deleteEvent(@PathVariable("event_id") Integer id) {
         return ResponseEntity.ok(eventService.deleteEvent(id));
     }
