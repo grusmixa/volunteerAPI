@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.ssau.volunteerapi.exception.NotFoundException;
 import ru.ssau.volunteerapi.model.dto.patch.UserPatch;
@@ -14,6 +15,7 @@ import ru.ssau.volunteerapi.model.dto.request.LoginRequest;
 import ru.ssau.volunteerapi.model.dto.request.UserRequest;
 import ru.ssau.volunteerapi.model.dto.response.LoginResponse;
 import ru.ssau.volunteerapi.model.dto.response.UserResponse;
+import ru.ssau.volunteerapi.model.entitie.Role;
 import ru.ssau.volunteerapi.model.entitie.User;
 import ru.ssau.volunteerapi.model.mapper.UserMapper;
 import ru.ssau.volunteerapi.repository.UserRepository;
@@ -28,6 +30,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final AuthenticationManager authenticationManager;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserResponse findUserByUUID(UUID uuid) {
@@ -42,6 +45,9 @@ public class UserServiceImpl implements UserService {
     public LoginResponse register(UserRequest userRequest) {
         log.info("Attempt register user with login {}.", userRequest.login());
         User user = userMapper.toEntity(userRequest);
+        user.setId(UUID.randomUUID());
+        user.setRole(Role.USER);
+        user.setPassword(passwordEncoder.encode(userRequest.password()));
         userRepository.save(user);
         return new LoginResponse("", userRequest.firstName(), userRequest.secondName());
     }
@@ -66,7 +72,7 @@ public class UserServiceImpl implements UserService {
         log.info("Login request for user {} account received", loginRequest.login());
         User foundUser = userRepository.findByLogin(loginRequest.login());
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(foundUser.getEmail(), loginRequest.password());
+                new UsernamePasswordAuthenticationToken(loginRequest.login(), loginRequest.password());
         authenticationManager.authenticate(authenticationToken);
         log.info("User {} successfully authenticated", loginRequest.login());
         return new LoginResponse("", foundUser.getFirstName(), foundUser.getSecondName());
