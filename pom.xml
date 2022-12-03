@@ -18,6 +18,7 @@
         <testcontainers.version>1.17.6</testcontainers.version>
         <javax.version>2.2</javax.version>
         <springdoc.version>1.6.11</springdoc.version>
+        <mapstruct.version>1.5.2.Final</mapstruct.version>
     </properties>
     <dependencies>
         <!--    DB Tools    -->
@@ -67,6 +68,18 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${mapstruct.version}</version>
         </dependency>
 
         <!--    Testing    -->
