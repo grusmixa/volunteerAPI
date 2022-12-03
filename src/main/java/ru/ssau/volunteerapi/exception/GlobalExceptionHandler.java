@@ -1,0 +1,17 @@
+package ru.ssau.volunteerapi.exception;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ApiError> handleNotFoundException(NotFoundException e) {
+        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND,e.getMessage(),e);
+        return new ResponseEntity<>(apiError, apiError.getStatus());
+    }
+
+}

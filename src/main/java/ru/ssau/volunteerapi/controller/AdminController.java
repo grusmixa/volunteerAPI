@@ -5,7 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.ssau.volunteerapi.model.dto.response.ApplicationResponse;
 import ru.ssau.volunteerapi.model.dto.general.EventGeneral;
+import ru.ssau.volunteerapi.model.dto.response.UserResponse;
 import ru.ssau.volunteerapi.service.interfaces.EventService;
+import ru.ssau.volunteerapi.service.interfaces.UserService;
 
 import java.util.UUID;
 
@@ -15,6 +17,12 @@ import java.util.UUID;
 public class AdminController {
     private final EventService eventService;
 
+    private final UserService userService;
+
+    @GetMapping("/users/{user_id}")
+    public ResponseEntity<UserResponse> findUserByUUID(@PathVariable("user_id") UUID userId) {
+        return ResponseEntity.ok(userService.findUserByUUID(userId));
+    }
     @PostMapping
     public ResponseEntity<EventGeneral> createEvent(@RequestBody EventGeneral eventGeneral) {
         return ResponseEntity.ok(eventService.createEvent(eventGeneral));

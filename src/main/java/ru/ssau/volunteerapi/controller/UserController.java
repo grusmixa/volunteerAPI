@@ -15,11 +15,6 @@ import java.util.UUID;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/{user_id}")
-    public ResponseEntity<UserResponse> findUserByUUID(@PathVariable("user_id") UUID userId) {
-        return ResponseEntity.ok(userService.findUserByUUID(userId));
-    }
-
     @PatchMapping
     public ResponseEntity<UserResponse> updateUser(@RequestBody UserPatch userPatch) {
         return ResponseEntity.ok(userService.patchUser(userPatch));

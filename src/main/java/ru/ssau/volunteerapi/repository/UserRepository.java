@@ -6,4 +6,5 @@ import ru.ssau.volunteerapi.model.entitie.User;
 import java.util.UUID;
 
 public interface UserRepository extends JpaRepository<User, UUID> {
+    User findByLogin(String login);
 }
