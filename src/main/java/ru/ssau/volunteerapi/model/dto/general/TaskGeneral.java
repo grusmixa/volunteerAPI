@@ -6,5 +6,6 @@ import lombok.Builder;
 public record TaskGeneral(Integer id,
                           String title,
                           String description,
-                          String wish) {
+                          String wish,
+                          Integer eventId) {
 }

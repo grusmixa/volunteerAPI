@@ -9,6 +9,6 @@ public interface TaskService {
 
     TaskGeneral getTaskById(Integer id);
 
-    List<TaskGeneral> getAllTasks();
+    List<TaskGeneral> getTaskByEventId(Integer id);
 
 }
