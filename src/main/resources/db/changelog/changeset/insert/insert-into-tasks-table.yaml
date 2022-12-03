@@ -1,0 +1,65 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-into-tasks-table
+      author: Batman
+      changes:
+        - insert:
+            tableName: tasks
+            columns:
+              - column:
+                  name: title
+                  value: Уборка
+              - column:
+                  name: description
+                  value: Уборка прилегающего помещения
+              - column:
+                  name: wish
+                  value: От вас нужно упорство и усердие
+              - column:
+                  name: event_id
+                  value: 1
+        - insert:
+            tableName: tasks
+            columns:
+              - column:
+                  name: title
+                  value: Мойка
+              - column:
+                  name: description
+                  value: Мойка прилегающего помещения
+              - column:
+                  name: wish
+                  value: От вас нужно упорство и усердие
+              - column:
+                  name: event_id
+                  value: 1
+        - insert:
+            tableName: tasks
+            columns:
+              - column:
+                  name: title
+                  value: Мойка
+              - column:
+                  name: description
+                  value: Мойка прилегающего помещения
+              - column:
+                  name: wish
+                  value: От вас нужно упорство и усердие
+              - column:
+                  name: event_id
+                  value: 2
+        - insert:
+            tableName: tasks
+            columns:
+              - column:
+                  name: title
+                  value: Мойка
+              - column:
+                  name: description
+                  value: Мойка прилегающего помещения
+              - column:
+                  name: wish
+                  value: От вас нужно упорство и усердие
+              - column:
+                  name: event_id
+                  value: 3

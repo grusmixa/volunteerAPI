@@ -1,7 +1,6 @@
 package ru.ssau.volunteerapi.model.dto.general;
 
 import lombok.Builder;
-import ru.ssau.volunteerapi.model.dto.general.TaskGeneral;
 
 import java.sql.Date;
 import java.sql.Time;

@@ -1,0 +1,68 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-into-users-table
+      author: Batman
+      changes:
+        - insert:
+            tableName: events
+            columns:
+              - column:
+                  name: title
+                  value: Концерт "Миру мир"
+              - column:
+                  name: volunteer_amount
+                  value: 100
+              - column:
+                  name: place
+                  value: Самара - Арена
+              - column:
+                  name: started_day
+                  valueDate: 2022-12-03
+              - column:
+                  name: ended_day
+                  valueDate: 2022-12-29
+              - column:
+                  name: started_time
+                  value: 13:00:00 ADT
+        - insert:
+            tableName: events
+            columns:
+              - column:
+                  name: title
+                  value: Форум наследие
+              - column:
+                  name: volunteer_amount
+                  value: 50
+              - column:
+                  name: place
+                  value: Береговая волги
+              - column:
+                  name: started_day
+                  valueDate: 2023-01-03
+              - column:
+                  name: ended_day
+                  valueDate: 2023-01-07
+              - column:
+                  name: started_time
+                  value: 13:00:00 ADT
+        - insert:
+            tableName: events
+            columns:
+              - column:
+                  name: title
+                  value: Выставка "Цветочный рай"
+              - column:
+                  name: volunteer_amount
+                  value: 75
+              - column:
+                  name: place
+                  value: Береговая волги
+              - column:
+                  name: started_day
+                  valueDate: 2023-04-03
+              - column:
+                  name: ended_day
+                  valueDate: 2023-04-07
+              - column:
+                  name: started_time
+                  value: 13:00:00 ADT

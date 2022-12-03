@@ -1,3 +1,9 @@
 databaseChangeLog:
   - include:
       file: db/changelog/changeset/insert/insert-into-users-table.yaml
+  - include:
+      file: db/changelog/changeset/insert/insert-into-events-table.yaml
+  - include:
+      file: db/changelog/changeset/insert/insert-into-tasks-table.yaml
+  - include:
+      file: db/changelog/changeset/insert/insert-into-applications-table.yaml
