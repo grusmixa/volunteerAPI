@@ -17,7 +17,7 @@ databaseChangeLog:
                   value: Грушенков
               - column:
                   name: login
-                  value: GrushenkovMikhail
+                  value: Grushe
               - column:
                   name: password
                   value: admin
@@ -57,7 +57,7 @@ databaseChangeLog:
                   value: Сусликова
               - column:
                   name: login
-                  value: SuslikovaMaria
+                  value: Susli
               - column:
                   name: password
                   value: user
