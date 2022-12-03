@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Date;
 import java.sql.Time;
-import java.util.UUID;
 
 @Getter
 @Setter

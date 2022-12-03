@@ -1,7 +1,22 @@
 package ru.ssau.volunteerapi.service.interfaces;
 
-import ru.ssau.volunteerapi.model.dto.response.EventResponse;
+import ru.ssau.volunteerapi.model.dto.general.EventGeneral;
+import ru.ssau.volunteerapi.model.dto.response.ApplicationResponse;
+
+import java.util.List;
+import java.util.UUID;
 
 public interface EventService {
-    EventResponse getEventById(Integer id);
+    EventGeneral getEventById(Integer id);
+
+    List<EventGeneral> getAllEvents();
+
+    EventGeneral createEvent(EventGeneral eventGeneral);
+
+    Void deleteEvent(Integer id);
+
+    ApplicationResponse getApplicationsByEventId(Integer id);
+
+    Void changeUserStatusInApplication(Integer id, UUID userId);
+
 }
