@@ -10,7 +10,7 @@ import ru.ssau.volunteerapi.model.entitie.Event;
 
 import java.util.List;
 
-@Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, componentModel = "spring")
 public interface EventMapper {
     @Mapping(target = "tasks", source = "taskGenerals")
     EventResponse toResponse(Event event, List<TaskGeneral> taskGenerals);

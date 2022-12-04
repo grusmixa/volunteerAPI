@@ -7,8 +7,9 @@ import ru.ssau.volunteerapi.model.entitie.Application;
 
 import java.util.List;
 
-@Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, componentModel = "spring")
 public interface ApplicationMapper {
     List<ApplicationResponse> toResponses(List<Application> applicationResponses);
+
     ApplicationResponse toResponse(Application applicationResponse);
 }

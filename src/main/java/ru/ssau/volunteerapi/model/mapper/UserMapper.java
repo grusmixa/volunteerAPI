@@ -12,12 +12,7 @@ import ru.ssau.volunteerapi.model.entitie.User;
 public interface UserMapper {
     User toEntity(UserRequest userRequest);
 
-    User toEntity(UserResponse userResponse);
-
     User toEntity(UserPatch userPatch, @MappingTarget User user);
-
-
-    UserRequest toRequest(User user);
 
     UserResponse toResponse(User user);
 
