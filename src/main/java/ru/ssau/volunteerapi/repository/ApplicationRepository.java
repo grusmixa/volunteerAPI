@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface ApplicationRepository extends JpaRepository<Application,Integer> {
     List<Application> findByUserId(User user);
-    List<Application> findByEventId(Event event);
+    List<Application> findAllByEventId(Event event);
 }

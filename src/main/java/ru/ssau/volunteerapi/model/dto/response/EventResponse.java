@@ -1,13 +1,14 @@
-package ru.ssau.volunteerapi.model.dto.general;
+package ru.ssau.volunteerapi.model.dto.response;
 
 import lombok.Builder;
+import ru.ssau.volunteerapi.model.dto.general.TaskGeneral;
 
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
 
 @Builder
-public record EventGeneral(Integer id,
+public record EventResponse(Integer id,
                            String title,
                            String description,
                            Integer volunteersAmount,

@@ -3,9 +3,11 @@ package ru.ssau.volunteerapi.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.ssau.volunteerapi.model.dto.general.EventGeneral;
+import ru.ssau.volunteerapi.model.dto.request.EventRequest;
 import ru.ssau.volunteerapi.model.dto.response.ApplicationResponse;
+import ru.ssau.volunteerapi.model.dto.response.EventResponse;
 import ru.ssau.volunteerapi.model.dto.response.UserResponse;
+import ru.ssau.volunteerapi.model.entitie.ApplicationStatus;
 import ru.ssau.volunteerapi.service.interfaces.ApplicationService;
 import ru.ssau.volunteerapi.service.interfaces.EventService;
 import ru.ssau.volunteerapi.service.interfaces.UserService;
@@ -28,8 +30,8 @@ public class AdminController {
     }
 
     @PostMapping
-    public ResponseEntity<EventGeneral> createEvent(@RequestBody EventGeneral eventGeneral) {
-        return ResponseEntity.ok(eventService.createEvent(eventGeneral));
+    public ResponseEntity<EventResponse> createEvent(@RequestBody EventRequest eventRequest) {
+        return ResponseEntity.ok(eventService.createEvent(eventRequest));
     }
 
     @DeleteMapping("/{event_id}")
@@ -44,7 +46,8 @@ public class AdminController {
 
     @GetMapping("/{event_id}/applications/{user_id}")
     public ResponseEntity<Void> changeUserStatusInApplication(@PathVariable("event_id") Integer id,
-                                                              @PathVariable("user_id") UUID userId) {
-        return ResponseEntity.ok(eventService.changeUserStatusInApplication(id, userId));
+                                                              @PathVariable("user_id") UUID userId,
+                                                              @RequestBody ApplicationStatus status) {
+        return ResponseEntity.ok(applicationService.changeUserStatusInApplication(id, userId,status));
     }
 }

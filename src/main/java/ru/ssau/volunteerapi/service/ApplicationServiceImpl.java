@@ -19,6 +19,7 @@ import ru.ssau.volunteerapi.service.interfaces.EventService;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -69,6 +70,20 @@ public class ApplicationServiceImpl implements ApplicationService {
         String adminLogin = SecurityContextHolder.getContext().getAuthentication().getName();
         log.info("Admin {} trying get applications on event with id {}.", adminLogin, id);
         Event event = eventService.findEntityById(id);
-        return applicationMapper.toResponses(applicationRepository.findByEventId(event));
+        return applicationMapper.toResponses(applicationRepository.findAllByEventId(event));
+    }
+
+    @Override
+    public Void changeUserStatusInApplication(Integer eventId, UUID userId, ApplicationStatus status) {
+        String adminLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+        log.info("Admin {} trying change user with id {} application status to {}.", adminLogin, userId, status);
+        Application application = applicationRepository.findAllByEventId(eventService.findEntityById(eventId))
+                .stream()
+                .filter(application1 -> application1.getUserId().getId() == userId)
+                .findAny()
+                .orElseThrow(() -> new NotFoundException("User with id " + userId + " dont have application to event" + eventId));
+        application.setStatus(status);
+        applicationRepository.save(application);
+        return null;
     }
 }
