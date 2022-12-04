@@ -37,7 +37,7 @@ databaseChangeLog:
               - column:
                   remarks: "Пароль"
                   name: password
-                  type: VARCHAR(10)
+                  type: VARCHAR(255)
                   constraints:
                     nullable: false
               - column:

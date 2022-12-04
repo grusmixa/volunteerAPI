@@ -24,8 +24,8 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getTaskById(id));
     }
 
-    @GetMapping
-    public ResponseEntity<List<TaskGeneral>> getAllTasks() {
-        return ResponseEntity.ok(taskService.getAllTasks());
+    @GetMapping("/event/{event_id}")
+    public ResponseEntity<List<TaskGeneral>> getTaskByEventId(@PathVariable("event_id") Integer id) {
+        return ResponseEntity.ok(taskService.getTaskByEventId(id));
     }
 }
