@@ -10,4 +10,6 @@ public interface ApplicationService {
     ApplicationResponse getApplicationById(Integer id);
 
     ApplicationResponse applyToEvent(Integer eventId);
+
+    List<ApplicationResponse> getApplicationsByEventId(Integer id);
 }
