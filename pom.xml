@@ -19,6 +19,7 @@
         <javax.version>2.2</javax.version>
         <springdoc.version>1.6.11</springdoc.version>
         <mapstruct.version>1.5.2.Final</mapstruct.version>
+        <io.jsonwebtoken.jjwt>0.9.1</io.jsonwebtoken.jjwt>
     </properties>
     <dependencies>
         <!--    DB Tools    -->
@@ -43,6 +44,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${io.jsonwebtoken.jjwt}</version>
         </dependency>
 
         <dependency>

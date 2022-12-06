@@ -2,6 +2,7 @@ package ru.ssau.volunteerapi.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.ssau.volunteerapi.model.dto.request.LoginRequest;
 import ru.ssau.volunteerapi.model.dto.request.UserRequest;

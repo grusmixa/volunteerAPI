@@ -2,11 +2,11 @@ package ru.ssau.volunteerapi.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.ssau.volunteerapi.exception.NotFoundException;
@@ -19,6 +19,7 @@ import ru.ssau.volunteerapi.model.entitie.Role;
 import ru.ssau.volunteerapi.model.entitie.User;
 import ru.ssau.volunteerapi.model.mapper.UserMapper;
 import ru.ssau.volunteerapi.repository.UserRepository;
+import ru.ssau.volunteerapi.security.jwt.JwtTokenProvider;
 import ru.ssau.volunteerapi.service.interfaces.UserService;
 
 import java.util.UUID;
@@ -31,6 +32,7 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Override
     public UserResponse findUserByUUID(UUID uuid) {
@@ -42,6 +44,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findUserLogin(String login) {
+        return userRepository.findByLogin(login);
+    }
+
+    @Override
     public LoginResponse register(UserRequest userRequest) {
         log.info("Attempt register user with login {}.", userRequest.login());
         User user = userMapper.toEntity(userRequest);
@@ -49,7 +56,7 @@ public class UserServiceImpl implements UserService {
         user.setRole(Role.USER);
         user.setPassword(passwordEncoder.encode(userRequest.password()));
         userRepository.save(user);
-        return new LoginResponse("", userRequest.firstName(), userRequest.secondName());
+        return new LoginResponse(jwtTokenProvider.createToken(userRequest.login(), user.getRole()), userRequest.login(), user.getRole());
     }
 
     @Override
@@ -70,11 +77,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
         log.info("Login request for user {} account received", loginRequest.login());
-        User foundUser = userRepository.findByLogin(loginRequest.login());
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginRequest.login(), loginRequest.password());
-        authenticationManager.authenticate(authenticationToken);
+        Authentication authentication = authenticationManager.authenticate(authenticationToken);
+        org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
+        String login = user.getUsername();
+        String role = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority).findFirst().orElseThrow(IllegalArgumentException::new);
         log.info("User {} successfully authenticated", loginRequest.login());
-        return new LoginResponse("", foundUser.getFirstName(), foundUser.getSecondName());
+        return new LoginResponse(jwtTokenProvider.createToken(login, Role.valueOf(role)), loginRequest.login(), Role.valueOf(role));
     }
 }
