@@ -44,9 +44,9 @@ public class ApplicationServiceImpl implements ApplicationService {
         String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
         log.info("User {} trying get application with id {}.", userLogin, id);
         Application application = applicationRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Application with id " + id + " not found"));
+                .orElseThrow(() -> new NotFoundException("Заявка с id: " + id + " не найдена"));
         if (!Objects.equals(application.getUserId().getLogin(), userLogin)) {
-            throw new AccessDeniedException("You can't watch this application");
+            throw new AccessDeniedException("Нет прав для просмотра заявки");
         }
         return applicationMapper.toResponse(application);
     }
@@ -82,7 +82,7 @@ public class ApplicationServiceImpl implements ApplicationService {
                 .stream()
                 .filter(application1 -> application1.getUserId().getId().equals(userId))
                 .findAny()
-                .orElseThrow(() -> new NotFoundException("User with id " + userId + " dont have application to event " + event.getTitle()));
+                .orElseThrow(() -> new NotFoundException("Пользователь с id: " + userId + " не имеет заявки на мероприятие: " + event.getTitle()));
         application.setStatus(status);
         applicationRepository.save(application);
         return null;

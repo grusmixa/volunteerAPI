@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
         String adminLogin = SecurityContextHolder.getContext().getAuthentication().getName();
         log.info("Admin {} tried to find user with id {}.", adminLogin, uuid);
         User user = userRepository.findById(uuid)
-                .orElseThrow(() -> new NotFoundException("User with id " + uuid + " not found!"));
+                .orElseThrow(() -> new NotFoundException("Пользователь с id: " + uuid + " не найден"));
         return userMapper.toResponse(user);
     }
 

@@ -30,14 +30,15 @@ public class TaskServiceImpl implements TaskService {
         Event event = eventService.findEntityById(taskGeneral.eventId());
         Task task = taskMapper.toEntity(taskGeneral);
         task.setEventId(event);
-        return taskGeneral;
+        taskRepository.save(task);
+        return taskMapper.toDto(task);
     }
 
     @Override
     public TaskGeneral getTaskById(Integer id) {
         String login = SecurityContextHolder.getContext().getAuthentication().getName();
         log.info("User {} trying get task {}", login, id);
-        Task task = taskRepository.findById(id).orElseThrow(() -> new NotFoundException("Task with id " + id + " not found"));
+        Task task = taskRepository.findById(id).orElseThrow(() -> new NotFoundException("Задача с id: " + id + " не найдена"));
         return taskMapper.toDto(task);
     }
 
