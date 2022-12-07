@@ -1,6 +1,7 @@
 package ru.ssau.volunteerapi.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -35,12 +36,12 @@ public class AdminController {
 
     @PostMapping
     public ResponseEntity<EventResponse> createEvent(@RequestBody EventRequest eventRequest) {
-        return ResponseEntity.ok(eventService.createEvent(eventRequest));
+        return new ResponseEntity<>(eventService.createEvent(eventRequest), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{event_id}")
     public ResponseEntity<Void> deleteEvent(@PathVariable("event_id") Integer id) {
-        return ResponseEntity.ok(eventService.deleteEvent(id));
+        return new ResponseEntity<>(eventService.deleteEvent(id),HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/{event_id}/applications")
@@ -57,6 +58,6 @@ public class AdminController {
 
     @PostMapping("/createTask")
     public ResponseEntity<TaskGeneral> createTask(@RequestBody TaskGeneral taskGeneral) {
-        return ResponseEntity.ok(taskService.createTask(taskGeneral));
+        return new ResponseEntity<>(taskService.createTask(taskGeneral), HttpStatus.CREATED);
     }
 }

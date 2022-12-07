@@ -70,6 +70,8 @@ public class ApplicationServiceImpl implements ApplicationService {
         String adminLogin = SecurityContextHolder.getContext().getAuthentication().getName();
         log.info("Admin {} trying get applications on event with id {}.", adminLogin, id);
         Event event = eventService.findEntityById(id);
+        List<Application> applications = applicationRepository.findAllByEventId(event);
+        System.out.println("d");
         return applicationMapper.toResponses(applicationRepository.findAllByEventId(event));
     }
 

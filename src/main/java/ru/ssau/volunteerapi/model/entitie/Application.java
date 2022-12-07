@@ -26,5 +26,6 @@ public class Application {
     private User userId;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private ApplicationStatus status;
 }
