@@ -49,10 +49,10 @@ public class AdminController {
         return ResponseEntity.ok(applicationService.getApplicationsByEventId(id));
     }
 
-    @GetMapping("/{event_id}/applications/{user_id}")
+    @PatchMapping("/{event_id}/applications/{user_id}")
     public ResponseEntity<Void> changeUserStatusInApplication(@PathVariable("event_id") Integer id,
                                                               @PathVariable("user_id") UUID userId,
-                                                              @RequestBody ApplicationStatus status) {
+                                                              @RequestParam ApplicationStatus status) {
         return ResponseEntity.ok(applicationService.changeUserStatusInApplication(id, userId, status));
     }
 

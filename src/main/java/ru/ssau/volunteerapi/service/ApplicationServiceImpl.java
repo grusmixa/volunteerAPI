@@ -70,8 +70,6 @@ public class ApplicationServiceImpl implements ApplicationService {
         String adminLogin = SecurityContextHolder.getContext().getAuthentication().getName();
         log.info("Admin {} trying get applications on event with id {}.", adminLogin, id);
         Event event = eventService.findEntityById(id);
-        List<Application> applications = applicationRepository.findAllByEventId(event);
-        System.out.println("d");
         return applicationMapper.toResponses(applicationRepository.findAllByEventId(event));
     }
 
@@ -79,11 +77,12 @@ public class ApplicationServiceImpl implements ApplicationService {
     public Void changeUserStatusInApplication(Integer eventId, UUID userId, ApplicationStatus status) {
         String adminLogin = SecurityContextHolder.getContext().getAuthentication().getName();
         log.info("Admin {} trying change user with id {} application status to {}.", adminLogin, userId, status);
-        Application application = applicationRepository.findAllByEventId(eventService.findEntityById(eventId))
+        Event event = eventService.findEntityById(eventId);
+        Application application = applicationRepository.findAllByEventId(event)
                 .stream()
-                .filter(application1 -> application1.getUserId().getId() == userId)
+                .filter(application1 -> application1.getUserId().getId().equals(userId))
                 .findAny()
-                .orElseThrow(() -> new NotFoundException("User with id " + userId + " dont have application to event" + eventId));
+                .orElseThrow(() -> new NotFoundException("User with id " + userId + " dont have application to event " + event.getTitle()));
         application.setStatus(status);
         applicationRepository.save(application);
         return null;
