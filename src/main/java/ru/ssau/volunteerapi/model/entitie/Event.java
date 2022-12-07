@@ -2,10 +2,7 @@ package ru.ssau.volunteerapi.model.entitie;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -19,6 +16,7 @@ import java.sql.Time;
 @Table(name = "events")
 public class Event {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "title")

@@ -14,6 +14,7 @@ import javax.persistence.*;
 @Table(name = "applications")
 public class Application {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne

@@ -13,3 +13,4 @@ application:
   auth:
     cookie-name: volunteerJWT
     jwt-secret: volunteerSecretKey
+    jwt-expiration-time: 99999h

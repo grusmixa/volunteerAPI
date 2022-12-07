@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/events")
 @RequiredArgsConstructor
-@PreAuthorize("hasAnyAuthority('USER')")
+@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 public class EventController {
     private final EventService eventService;
 

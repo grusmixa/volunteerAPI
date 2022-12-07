@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/tasks")
 @RequiredArgsConstructor
-@PreAuthorize("hasAnyAuthority('USER')")
+@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 public class TaskController {
     private final TaskService taskService;
 

@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/application")
 @RequiredArgsConstructor
-@PreAuthorize("hasAnyAuthority('USER')")
+@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 public class ApplicationController {
     private final ApplicationService applicationService;
 
