@@ -2,10 +2,7 @@ package ru.ssau.volunteerapi.model.entitie;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
@@ -35,6 +32,7 @@ public class User {
     private String password;
 
     @Column(name = "role")
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @Column(name = "phone")
@@ -53,6 +51,7 @@ public class User {
     private String education;
 
     @Column(name = "sex")
+    @Enumerated(EnumType.STRING)
     private Sex sex;
 
     @Column(name = "created_at", insertable = false)

@@ -17,6 +17,7 @@ public interface EventMapper {
 
     EventResponse toResponse(Event event);
 
+    @Mapping(target = "tasks", ignore = true)
     List<EventResponse> toResponses(List<Event> event);
 
     Event toEntity(EventRequest eventRequest);

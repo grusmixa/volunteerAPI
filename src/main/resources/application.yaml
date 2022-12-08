@@ -9,3 +9,8 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
+application:
+  auth:
+    cookie-name: volunteerJWT
+    jwt-secret: volunteerSecretKey
+    jwt-expiration-time: 99999h

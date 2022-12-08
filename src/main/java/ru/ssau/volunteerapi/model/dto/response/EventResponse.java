@@ -10,8 +10,7 @@ import java.util.List;
 @Builder
 public record EventResponse(Integer id,
                            String title,
-                           String description,
-                           Integer volunteersAmount,
+                           Integer volunteerAmount,
                            List<TaskGeneral> tasks,
                            Date startedDay,
                            Date endedDay,

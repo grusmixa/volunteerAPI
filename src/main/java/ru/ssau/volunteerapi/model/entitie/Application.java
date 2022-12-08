@@ -14,6 +14,7 @@ import javax.persistence.*;
 @Table(name = "applications")
 public class Application {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
@@ -25,5 +26,6 @@ public class Application {
     private User userId;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private ApplicationStatus status;
 }

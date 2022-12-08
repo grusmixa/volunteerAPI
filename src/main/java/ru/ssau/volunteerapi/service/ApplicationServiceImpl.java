@@ -3,16 +3,15 @@ package ru.ssau.volunteerapi.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ru.ssau.volunteerapi.exception.NotFoundException;
 import ru.ssau.volunteerapi.model.dto.response.ApplicationResponse;
-import ru.ssau.volunteerapi.model.entitie.Application;
-import ru.ssau.volunteerapi.model.entitie.ApplicationStatus;
-import ru.ssau.volunteerapi.model.entitie.Event;
-import ru.ssau.volunteerapi.model.entitie.User;
+import ru.ssau.volunteerapi.model.entitie.*;
 import ru.ssau.volunteerapi.model.mapper.ApplicationMapper;
 import ru.ssau.volunteerapi.repository.ApplicationRepository;
+import ru.ssau.volunteerapi.repository.TaskRepository;
 import ru.ssau.volunteerapi.repository.UserRepository;
 import ru.ssau.volunteerapi.service.interfaces.ApplicationService;
 import ru.ssau.volunteerapi.service.interfaces.EventService;
@@ -30,6 +29,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     private final ApplicationMapper applicationMapper;
     private final EventService eventService;
 
+
     @Override
     public List<ApplicationResponse> getAllApplications() {
         String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -42,11 +42,16 @@ public class ApplicationServiceImpl implements ApplicationService {
     @Override
     public ApplicationResponse getApplicationById(Integer id) {
         String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+        SimpleGrantedAuthority authority =(SimpleGrantedAuthority) SecurityContextHolder.getContext().getAuthentication()
+                .getAuthorities().stream()
+                .findAny()
+                .orElseThrow();
+        Role role = Role.valueOf(authority.getAuthority());
         log.info("User {} trying get application with id {}.", userLogin, id);
         Application application = applicationRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Application with id " + id + " not found"));
-        if (!Objects.equals(application.getUserId().getLogin(), userLogin)) {
-            throw new AccessDeniedException("You can't watch this application");
+                .orElseThrow(() -> new NotFoundException("Заявка с id: " + id + " не найдена"));
+        if (!Objects.equals(application.getUserId().getLogin(), userLogin) && !role.equals(Role.ADMIN)) {
+            throw new AccessDeniedException("Нет прав для просмотра заявки");
         }
         return applicationMapper.toResponse(application);
     }
@@ -77,11 +82,12 @@ public class ApplicationServiceImpl implements ApplicationService {
     public Void changeUserStatusInApplication(Integer eventId, UUID userId, ApplicationStatus status) {
         String adminLogin = SecurityContextHolder.getContext().getAuthentication().getName();
         log.info("Admin {} trying change user with id {} application status to {}.", adminLogin, userId, status);
-        Application application = applicationRepository.findAllByEventId(eventService.findEntityById(eventId))
+        Event event = eventService.findEntityById(eventId);
+        Application application = applicationRepository.findAllByEventId(event)
                 .stream()
-                .filter(application1 -> application1.getUserId().getId() == userId)
+                .filter(application1 -> application1.getUserId().getId().equals(userId))
                 .findAny()
-                .orElseThrow(() -> new NotFoundException("User with id " + userId + " dont have application to event" + eventId));
+                .orElseThrow(() -> new NotFoundException("Пользователь с id: " + userId + " не имеет заявки на мероприятие: " + event.getTitle()));
         application.setStatus(status);
         applicationRepository.save(application);
         return null;

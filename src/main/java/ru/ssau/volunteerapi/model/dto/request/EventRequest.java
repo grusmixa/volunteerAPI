@@ -8,8 +8,8 @@ import java.sql.Time;
 @Builder
 public record EventRequest(Integer id,
                            String title,
-                           String description,
-                           Integer volunteersAmount,
+                           Integer volunteerAmount,
+                           String place,
                            Date startedDay,
                            Date endedDay,
                            Time startedTime) {
