@@ -2,8 +2,8 @@ version: '3.8'
 
 services:
   web:
+    image: ildarthegreat/volunteerapi:1.0
     container_name: volunteerServer
-    build: .
     ports:
       - "8080:8080"
     depends_on:
