@@ -3,16 +3,15 @@ package ru.ssau.volunteerapi.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ru.ssau.volunteerapi.exception.NotFoundException;
 import ru.ssau.volunteerapi.model.dto.response.ApplicationResponse;
-import ru.ssau.volunteerapi.model.entitie.Application;
-import ru.ssau.volunteerapi.model.entitie.ApplicationStatus;
-import ru.ssau.volunteerapi.model.entitie.Event;
-import ru.ssau.volunteerapi.model.entitie.User;
+import ru.ssau.volunteerapi.model.entitie.*;
 import ru.ssau.volunteerapi.model.mapper.ApplicationMapper;
 import ru.ssau.volunteerapi.repository.ApplicationRepository;
+import ru.ssau.volunteerapi.repository.TaskRepository;
 import ru.ssau.volunteerapi.repository.UserRepository;
 import ru.ssau.volunteerapi.service.interfaces.ApplicationService;
 import ru.ssau.volunteerapi.service.interfaces.EventService;
@@ -30,6 +29,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     private final ApplicationMapper applicationMapper;
     private final EventService eventService;
 
+
     @Override
     public List<ApplicationResponse> getAllApplications() {
         String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -42,10 +42,15 @@ public class ApplicationServiceImpl implements ApplicationService {
     @Override
     public ApplicationResponse getApplicationById(Integer id) {
         String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+        SimpleGrantedAuthority authority =(SimpleGrantedAuthority) SecurityContextHolder.getContext().getAuthentication()
+                .getAuthorities().stream()
+                .findAny()
+                .orElseThrow();
+        Role role = Role.valueOf(authority.getAuthority());
         log.info("User {} trying get application with id {}.", userLogin, id);
         Application application = applicationRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Заявка с id: " + id + " не найдена"));
-        if (!Objects.equals(application.getUserId().getLogin(), userLogin)) {
+        if (!Objects.equals(application.getUserId().getLogin(), userLogin) && !role.equals(Role.ADMIN)) {
             throw new AccessDeniedException("Нет прав для просмотра заявки");
         }
         return applicationMapper.toResponse(application);
