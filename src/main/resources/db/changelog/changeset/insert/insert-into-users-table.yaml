@@ -1,0 +1,84 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-into-users-table
+      author: Batman
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  value: a1c95505-04c6-49d3-a67d-cdc7320400bc
+              - column:
+                  name: first_name
+                  value: Михаил
+              - column:
+                  name: second_name
+                  value: Грушенков
+              - column:
+                  name: login
+                  value: Grushe
+              - column:
+                  name: password
+                  value: admin
+              - column:
+                  name: role
+                  value: ADMIN
+              - column:
+                  name: phone
+                  value: +7(997)-777-77-77
+              - column:
+                  name: email
+                  value: grushenkovmikhail@gmail.com
+              - column:
+                  name: experience
+                  value: No
+              - column:
+                  name: languages
+                  value: Russian, English
+              - column:
+                  name: education
+                  value: Samara University
+              - column:
+                  name: sex
+                  value: MALE
+
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  value: 3e1ff2bc-744f-4836-8b4b-9a874d08b353
+              - column:
+                  name: first_name
+                  value: Мария
+              - column:
+                  name: second_name
+                  value: Сусликова
+              - column:
+                  name: login
+                  value: Susli
+              - column:
+                  name: password
+                  value: user
+              - column:
+                  name: role
+                  value: USER
+              - column:
+                  name: phone
+                  value: +7(997)-777-77-76
+              - column:
+                  name: email
+                  value: suslikovamaria@gmail.com
+              - column:
+                  name: experience
+                  value: No
+              - column:
+                  name: languages
+                  value: Russian, English
+              - column:
+                  name: education
+                  value: Samara University
+              - column:
+                  name: sex
+                  value: FEMALE

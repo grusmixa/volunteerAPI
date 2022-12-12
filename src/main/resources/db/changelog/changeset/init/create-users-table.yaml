@@ -1,0 +1,98 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-users-table
+      author: Batman
+      comment: "Создание таблицы с данными о пользователях"
+      changes:
+        - createTable:
+            tableName: users
+            remarks: "Таблица с данными о пользователях"
+            columns:
+              - column:
+                  remarks: "UUID пользователя"
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  remarks: "Имя"
+                  name: first_name
+                  type: VARCHAR(40)
+                  constraints:
+                    nullable: false
+              - column:
+                  remarks: "Фамилия"
+                  name: second_name
+                  type: VARCHAR(40)
+                  constraints:
+                    nullable: true
+              - column:
+                  remarks: "Логин"
+                  name: login
+                  type: VARCHAR(8)
+                  constraints:
+                    unique: true
+                    nullable: true
+              - column:
+                  remarks: "Пароль"
+                  name: password
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  remarks: "Роль"
+                  name: role
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  remarks: "Номер телефона"
+                  name: phone
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  remarks: "Почта"
+                  name: email
+                  type: VARCHAR(128)
+                  constraints:
+                    nullable: false
+              - column:
+                  remarks: "Опыт"
+                  name: experience
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  remarks: "Языки"
+                  name: languages
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  remarks: "Образование"
+                  name: education
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  remarks: "Пол"
+                  name: sex
+                  type: VARCHAR(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  remarks: "Время создания аккаунта"
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  remarks: "Время последнего изменения в аккаунте"
+                  name: modified_at
+                  type: TIMESTAMP
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
