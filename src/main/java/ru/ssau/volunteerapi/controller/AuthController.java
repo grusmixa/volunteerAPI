@@ -15,7 +15,7 @@ import ru.ssau.volunteerapi.service.interfaces.UserService;
 public class AuthController {
     private final UserService userService;
 
-    @PostMapping("/login")
+    @PostMapping(value = "/login",produces = "application/json; charset=UTF-8")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
         return ResponseEntity.ok(userService.login(loginRequest));
     }

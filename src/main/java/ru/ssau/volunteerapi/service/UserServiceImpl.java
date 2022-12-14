@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
         user.setRole(Role.USER);
         user.setPassword(passwordEncoder.encode(userRequest.password()));
         userRepository.save(user);
-        return new LoginResponse(jwtTokenProvider.createToken(userRequest.login(), user.getRole()), userRequest.login(), user.getRole());
+        return new LoginResponse(jwtTokenProvider.createToken(userRequest.login(), user.getRole()), userRequest.login(), user.getRole(), userRequest.firstName(), user.getSecondName());
     }
 
     @Override
@@ -84,7 +84,8 @@ public class UserServiceImpl implements UserService {
         String login = user.getUsername();
         String role = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority).findFirst().orElseThrow(IllegalArgumentException::new);
+        User dbUser = findUserLogin(login);
         log.info("User {} successfully authenticated", loginRequest.login());
-        return new LoginResponse(jwtTokenProvider.createToken(login, Role.valueOf(role)), loginRequest.login(), Role.valueOf(role));
+        return new LoginResponse(jwtTokenProvider.createToken(login, Role.valueOf(role)), loginRequest.login(), Role.valueOf(role),dbUser.getFirstName(), dbUser.getSecondName());
     }
 }

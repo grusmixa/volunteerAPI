@@ -4,5 +4,5 @@ import lombok.Builder;
 import ru.ssau.volunteerapi.model.entitie.Role;
 
 @Builder
-public record LoginResponse(String accessToken,String login, Role role) {
+public record LoginResponse(String accessToken,String login, Role role,String firstName,String secondName) {
 }
