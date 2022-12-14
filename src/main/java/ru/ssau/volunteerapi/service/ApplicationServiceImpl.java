@@ -62,6 +62,9 @@ public class ApplicationServiceImpl implements ApplicationService {
         log.info("User {} want apply to event with id {}.", userLogin, eventId);
         User user = userRepository.findByLogin(userLogin);
         Event event = eventService.findEntityById(eventId);
+        if(applicationRepository.findByUserIdAndEventId(user,event)!=null){
+            throw new IllegalArgumentException("You have already apply to this event");
+        }
         Application application = Application.builder()
                 .userId(user)
                 .eventId(event)

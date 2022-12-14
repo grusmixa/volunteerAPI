@@ -2,6 +2,7 @@ package ru.ssau.volunteerapi.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ssau.volunteerapi.exception.NotFoundException;
@@ -30,6 +31,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public EventResponse getEventById(Integer id) {
+        String login = SecurityContextHolder.getContext().getAuthentication().getName();
+        log.info("User with login {} tried to get event with id {}.", login,id);
         Event event = findEntityById(id);
         List<TaskGeneral> taskGenerals = taskMapper.toDtos(taskRepository.findByEventId(event));
         return eventMapper.toResponse(event, taskGenerals);
@@ -37,7 +40,10 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<EventResponse> getAllEvents() {
-        return eventMapper.toResponses(eventRepository.findAll());
+        String login = SecurityContextHolder.getContext().getAuthentication().getName();
+        log.info("User with login {} tried to get all events.", login);
+        List<Event> events = eventRepository.findAll();
+        return eventMapper.toResponses(events);
     }
 
     @Override

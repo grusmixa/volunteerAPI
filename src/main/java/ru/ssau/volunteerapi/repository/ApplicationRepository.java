@@ -11,4 +11,5 @@ public interface ApplicationRepository extends JpaRepository<Application,Integer
     List<Application> findByUserId(User user);
     List<Application> findAllByEventId(Event event);
     List<Application> deleteAllByEventId(Event event);
+    Application findByUserIdAndEventId(User userId,Event eventId);
 }

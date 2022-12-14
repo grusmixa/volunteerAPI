@@ -20,7 +20,7 @@ databaseChangeLog:
                   value: Grushe
               - column:
                   name: password
-                  value: admin
+                  value: $2a$10$1.T7wjAmaRuC6LGJszdExeBkKDeKSIgDgSu0Umo.q/O2ONOBPy4Cm
               - column:
                   name: role
                   value: ADMIN
@@ -60,7 +60,7 @@ databaseChangeLog:
                   value: Susli
               - column:
                   name: password
-                  value: user
+                  value: $2a$10$tObVQzS3xj0AYn9SOKYnXOHROeKkCRIvqQnXwV9cXkzVnYvjLjRMK
               - column:
                   name: role
                   value: USER
