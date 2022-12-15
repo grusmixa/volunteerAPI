@@ -17,22 +17,7 @@ databaseChangeLog:
                   value: От вас нужно упорство и усердие
               - column:
                   name: event_id
-                  value: 1
-        - insert:
-            tableName: tasks
-            columns:
-              - column:
-                  name: title
-                  value: Мойка
-              - column:
-                  name: description
-                  value: Мойка прилегающего помещения
-              - column:
-                  name: wish
-                  value: От вас нужно упорство и усердие
-              - column:
-                  name: event_id
-                  value: 1
+                  value: 2
         - insert:
             tableName: tasks
             columns:
@@ -63,3 +48,18 @@ databaseChangeLog:
               - column:
                   name: event_id
                   value: 3
+        - insert:
+            tableName: tasks
+            columns:
+              - column:
+                  name: title
+                  value: Мойка
+              - column:
+                  name: description
+                  value: Мойка прилегающего помещения
+              - column:
+                  name: wish
+                  value: От вас нужно упорство и усердие
+              - column:
+                  name: event_id
+                  value: 4
