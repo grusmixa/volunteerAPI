@@ -22,4 +22,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ApiError> handleIllegalArgumentException(IllegalArgumentException e) {
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST,e.getMessage(),e);
+        return new ResponseEntity<>(apiError, apiError.getStatus());
+    }
 }

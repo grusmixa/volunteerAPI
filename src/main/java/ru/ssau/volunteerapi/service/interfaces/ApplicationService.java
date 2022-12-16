@@ -16,4 +16,6 @@ public interface ApplicationService {
     List<ApplicationResponse> getApplicationsByEventId(Integer id);
 
     Void changeUserStatusInApplication(Integer id, UUID userId, ApplicationStatus status);
+
+    Void deleteApplication(Integer id);
 }

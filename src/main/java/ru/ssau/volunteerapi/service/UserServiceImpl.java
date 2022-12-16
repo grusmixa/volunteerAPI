@@ -37,9 +37,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse findUserByUUID(UUID uuid) {
         String adminLogin = SecurityContextHolder.getContext().getAuthentication().getName();
-        log.info("Admin {} tried to find user with id {}.", adminLogin, uuid);
         User user = userRepository.findById(uuid)
                 .orElseThrow(() -> new NotFoundException("Пользователь с id: " + uuid + " не найден"));
+        log.info("Админ {} просматривает пользователя с id {}.", adminLogin, uuid);
         return userMapper.toResponse(user);
     }
 
@@ -50,22 +50,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public LoginResponse register(UserRequest userRequest) {
-        log.info("Attempt register user with login {}.", userRequest.login());
+        log.info("Попытка регистрации аккаунта {}.", userRequest.login());
         User user = userMapper.toEntity(userRequest);
         user.setId(UUID.randomUUID());
         user.setRole(Role.USER);
         user.setPassword(passwordEncoder.encode(userRequest.password()));
         userRepository.save(user);
-        return new LoginResponse(jwtTokenProvider.createToken(userRequest.login(), user.getRole()), userRequest.login(), user.getRole());
+        return new LoginResponse(jwtTokenProvider.createToken(userRequest.login(), user.getRole()), userRequest.login(), user.getRole(), userRequest.firstName(), user.getSecondName());
     }
 
     @Override
     public UserResponse patchUser(UserPatch userPatch) {
         String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
-        log.info("User {} trying update user info.", userLogin);
         User oldUser = userRepository.findByLogin(userLogin);
         User newUser = userMapper.toEntity(userPatch, oldUser);
         userRepository.save(newUser);
+        log.info("Пользователь {} изменяет информацию о себе.", userLogin);
         return userMapper.toResponse(newUser);
     }
 
@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
-        log.info("Login request for user {} account received", loginRequest.login());
+        log.info("Попытка авторизации под логином {}", loginRequest.login());
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginRequest.login(), loginRequest.password());
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
@@ -84,7 +84,8 @@ public class UserServiceImpl implements UserService {
         String login = user.getUsername();
         String role = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority).findFirst().orElseThrow(IllegalArgumentException::new);
-        log.info("User {} successfully authenticated", loginRequest.login());
-        return new LoginResponse(jwtTokenProvider.createToken(login, Role.valueOf(role)), loginRequest.login(), Role.valueOf(role));
+        User dbUser = findUserLogin(login);
+        log.info("Пользователь {} успешно авторизовался", loginRequest.login());
+        return new LoginResponse(jwtTokenProvider.createToken(login, Role.valueOf(role)), loginRequest.login(), Role.valueOf(role), dbUser.getFirstName(), dbUser.getSecondName());
     }
 }

@@ -17,4 +17,6 @@ public interface EventService {
     Void deleteEvent(Integer id);
 
     Event findEntityById(Integer eventId);
+
+    List<EventResponse> getAllMyEvents();
 }

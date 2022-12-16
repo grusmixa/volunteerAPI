@@ -36,4 +36,8 @@ public class Event {
 
     @Column(name = "started_time")
     private Time startedTime;
+
+    @ManyToOne
+    @JoinColumn(name = "creator_id")
+    private User creatorId;
 }
