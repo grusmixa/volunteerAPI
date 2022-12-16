@@ -100,7 +100,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     public Void deleteApplication(Integer id) {
         String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
         log.info("User {} want delete his apply with id {}.", userLogin, id);
-        Application application = applicationRepository.findById(id).
+        Application application = applicationRepository.findByEventId(eventService.findEntityById(id)).
                 orElseThrow(() -> new NotFoundException("Заявки с id:"+ id + " не существует"));
         if(!application.getUserId().getLogin().equals(userLogin)){
             throw new AccessDeniedException("Нет прав для удаления заявки");

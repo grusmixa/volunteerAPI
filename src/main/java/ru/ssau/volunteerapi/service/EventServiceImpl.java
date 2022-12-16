@@ -16,6 +16,7 @@ import ru.ssau.volunteerapi.repository.ApplicationRepository;
 import ru.ssau.volunteerapi.repository.EventRepository;
 import ru.ssau.volunteerapi.repository.TaskRepository;
 import ru.ssau.volunteerapi.service.interfaces.EventService;
+import ru.ssau.volunteerapi.service.interfaces.UserService;
 
 import java.util.List;
 
@@ -28,11 +29,12 @@ public class EventServiceImpl implements EventService {
     private final TaskMapper taskMapper;
     private final TaskRepository taskRepository;
     private final ApplicationRepository applicationRepository;
+    private final UserService userService;
 
     @Override
     public EventResponse getEventById(Integer id) {
         String login = SecurityContextHolder.getContext().getAuthentication().getName();
-        log.info("User with login {} tried to get event with id {}.", login,id);
+        log.info("User with login {} tried to get event with id {}.", login, id);
         Event event = findEntityById(id);
         List<TaskGeneral> taskGenerals = taskMapper.toDtos(taskRepository.findByEventId(event));
         return eventMapper.toResponse(event, taskGenerals);
@@ -48,7 +50,10 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public EventResponse createEvent(EventRequest eventRequest) {
+        String admin = SecurityContextHolder.getContext().getAuthentication().getName();
+        log.info("Admin with login {} tried to create event.", admin);
         Event event = eventMapper.toEntity(eventRequest);
+        event.setCreatorId(userService.findUserLogin(admin));
         return eventMapper.toResponse(eventRepository.save(event));
     }
 
@@ -66,5 +71,13 @@ public class EventServiceImpl implements EventService {
     public Event findEntityById(Integer eventId) {
         return eventRepository.findById(eventId)
                 .orElseThrow(() -> new NotFoundException("Заявка с id: " + eventId + " не найдена"));
+    }
+
+    @Override
+    public List<EventResponse> getAllMyEvents() {
+        String admin = SecurityContextHolder.getContext().getAuthentication().getName();
+        log.info("Admin with login {} tried to get all him events.", admin);
+        List<Event> events = eventRepository.findAllByCreatorId(userService.findUserLogin(admin));
+        return eventMapper.toResponses(events);
     }
 }

@@ -24,6 +24,9 @@ databaseChangeLog:
               - column:
                   name: started_time
                   value: 13:00:00 ADT
+              - column:
+                  name: creator_id
+                  value: a2ec385f-ef88-4525-a319-0d51f1f6ae3b
         - insert:
             tableName: events
             columns:
@@ -45,6 +48,9 @@ databaseChangeLog:
               - column:
                   name: started_time
                   value: 13:00:00 ADT
+              - column:
+                  name: creator_id
+                  value: a1c95505-04c6-49d3-a67d-cdc7320400bc
         - insert:
             tableName: events
             columns:
@@ -66,6 +72,9 @@ databaseChangeLog:
               - column:
                   name: started_time
                   value: 13:00:00 ADT
+              - column:
+                  name: creator_id
+                  value: a2ec385f-ef88-4525-a319-0d51f1f6ae3b
         - insert:
             tableName: events
             columns:
@@ -87,6 +96,9 @@ databaseChangeLog:
               - column:
                   name: started_time
                   value: 13:00:00 ADT
+              - column:
+                  name: creator_id
+                  value: a1c95505-04c6-49d3-a67d-cdc7320400bc
         - insert:
             tableName: events
             columns:
@@ -108,6 +120,9 @@ databaseChangeLog:
               - column:
                   name: started_time
                   value: 13:00:00 ADT
+              - column:
+                  name: creator_id
+                  value: a2ec385f-ef88-4525-a319-0d51f1f6ae3b
         - insert:
             tableName: events
             columns:
@@ -129,6 +144,9 @@ databaseChangeLog:
               - column:
                   name: started_time
                   value: 13:00:00 ADT
+              - column:
+                  name: creator_id
+                  value: a1c95505-04c6-49d3-a67d-cdc7320400bc
         - insert:
             tableName: events
             columns:
@@ -150,6 +168,9 @@ databaseChangeLog:
               - column:
                   name: started_time
                   value: 13:00:00 ADT
+              - column:
+                  name: creator_id
+                  value: a1c95505-04c6-49d3-a67d-cdc7320400bc
         - insert:
             tableName: events
             columns:
@@ -171,3 +192,6 @@ databaseChangeLog:
               - column:
                   name: started_time
                   value: 13:00:00 ADT
+              - column:
+                  name: creator_id
+                  value: a1c95505-04c6-49d3-a67d-cdc7320400bc

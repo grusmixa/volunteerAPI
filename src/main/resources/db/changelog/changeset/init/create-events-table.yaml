@@ -52,3 +52,11 @@ databaseChangeLog:
                   type: TIME
                   constraints:
                     nullable: false
+              - column:
+                  remarks: "ID создателя"
+                  name: creator_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    foreignKeyName: user_id
+                    references: users(id)

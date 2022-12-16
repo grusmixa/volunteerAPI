@@ -39,6 +39,10 @@ public class AdminController {
         return new ResponseEntity<>(eventService.createEvent(eventRequest), HttpStatus.CREATED);
     }
 
+    @GetMapping(produces = "application/json; charset=UTF-8")
+    public ResponseEntity<List<EventResponse>> getAllMyEvents(){
+        return ResponseEntity.ok(eventService.getAllMyEvents());
+    }
     @DeleteMapping("/{event_id}")
     public ResponseEntity<Void> deleteEvent(@PathVariable("event_id") Integer id) {
         return new ResponseEntity<>(eventService.deleteEvent(id),HttpStatus.NO_CONTENT);

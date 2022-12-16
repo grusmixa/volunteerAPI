@@ -1,6 +1,7 @@
 package ru.ssau.volunteerapi.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class ApplicationController {
 
     @DeleteMapping("/{application_id}")
     public ResponseEntity<Void> deleteApplication(@PathVariable("application_id") Integer id) {
-        return ResponseEntity.ok(applicationService.deleteApplication(id));
+        return new ResponseEntity<>(applicationService.deleteApplication(id), HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/apply/{event_id}")
