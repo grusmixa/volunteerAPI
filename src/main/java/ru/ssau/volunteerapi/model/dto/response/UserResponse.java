@@ -12,6 +12,7 @@ public record UserResponse(UUID id,
                            Sex sex,
                            String experience,
                            String languages,
+                           String email,
                            String education,
                            String phone) {
 }

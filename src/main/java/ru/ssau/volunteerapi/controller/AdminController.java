@@ -29,7 +29,7 @@ public class AdminController {
     private final ApplicationService applicationService;
     private final TaskService taskService;
 
-    @GetMapping("/users/{user_id}")
+    @GetMapping(value = "/users/{user_id}", produces = "application/json; charset=UTF-8")
     public ResponseEntity<UserResponse> findUserByUUID(@PathVariable("user_id") UUID userId) {
         return ResponseEntity.ok(userService.findUserByUUID(userId));
     }
@@ -40,15 +40,16 @@ public class AdminController {
     }
 
     @GetMapping(produces = "application/json; charset=UTF-8")
-    public ResponseEntity<List<EventResponse>> getAllMyEvents(){
+    public ResponseEntity<List<EventResponse>> getAllMyEvents() {
         return ResponseEntity.ok(eventService.getAllMyEvents());
     }
+
     @DeleteMapping("/{event_id}")
     public ResponseEntity<Void> deleteEvent(@PathVariable("event_id") Integer id) {
-        return new ResponseEntity<>(eventService.deleteEvent(id),HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(eventService.deleteEvent(id), HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/{event_id}/applications")
+    @GetMapping(value = "/{event_id}/applications", produces = "application/json; charset=UTF-8")
     public ResponseEntity<List<ApplicationResponse>> getApplicationsByEventId(@PathVariable("event_id") Integer id) {
         return ResponseEntity.ok(applicationService.getApplicationsByEventId(id));
     }
