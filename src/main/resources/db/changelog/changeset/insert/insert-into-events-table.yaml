@@ -8,30 +8,6 @@ databaseChangeLog:
             columns:
               - column:
                   name: title
-                  value: test
-              - column:
-                  name: volunteer_amount
-                  value: 100
-              - column:
-                  name: place
-                  value: don't delete please
-              - column:
-                  name: started_day
-                  valueDate: 2022-12-03
-              - column:
-                  name: ended_day
-                  valueDate: 2022-12-29
-              - column:
-                  name: started_time
-                  value: 13:00:00 ADT
-              - column:
-                  name: creator_id
-                  value: a2ec385f-ef88-4525-a319-0d51f1f6ae3b
-        - insert:
-            tableName: events
-            columns:
-              - column:
-                  name: title
                   value: Концерт "Миру мир"
               - column:
                   name: volunteer_amount
