@@ -20,5 +20,7 @@ public interface EventMapper {
     @Mapping(target = "tasks", ignore = true)
     List<EventResponse> toResponses(List<Event> event);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "creatorId", ignore = true)
     Event toEntity(EventRequest eventRequest);
 }

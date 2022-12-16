@@ -24,12 +24,15 @@ databaseChangeLog:
               - column:
                   name: started_time
                   value: 13:00:00 ADT
+              - column:
+                  name: creator_id
+                  value: a1c95505-04c6-49d3-a67d-cdc7320400bc
         - insert:
             tableName: events
             columns:
               - column:
                   name: title
-                  value: Форум наследие
+                  value: Форум "наследие"
               - column:
                   name: volunteer_amount
                   value: 50
@@ -45,6 +48,9 @@ databaseChangeLog:
               - column:
                   name: started_time
                   value: 13:00:00 ADT
+              - column:
+                  name: creator_id
+                  value: a2ec385f-ef88-4525-a319-0d51f1f6ae3b
         - insert:
             tableName: events
             columns:
@@ -66,3 +72,102 @@ databaseChangeLog:
               - column:
                   name: started_time
                   value: 13:00:00 ADT
+              - column:
+                  name: creator_id
+                  value: a1c95505-04c6-49d3-a67d-cdc7320400bc
+        - insert:
+            tableName: events
+            columns:
+              - column:
+                  name: title
+                  value: Proдействие
+              - column:
+                  name: volunteer_amount
+                  value: 13
+              - column:
+                  name: place
+                  value: УТЕСОВ
+              - column:
+                  name: started_day
+                  valueDate: 2023-05-03
+              - column:
+                  name: ended_day
+                  valueDate: 2023-05-07
+              - column:
+                  name: started_time
+                  value: 13:00:00 ADT
+              - column:
+                  name: creator_id
+                  value: a2ec385f-ef88-4525-a319-0d51f1f6ae3b
+        - insert:
+            tableName: events
+            columns:
+              - column:
+                  name: title
+                  value: Показ фильма "Грех"
+              - column:
+                  name: volunteer_amount
+                  value: 13
+              - column:
+                  name: place
+                  value: Киновертикаль
+              - column:
+                  name: started_day
+                  valueDate: 2023-05-03
+              - column:
+                  name: ended_day
+                  valueDate: 2023-05-07
+              - column:
+                  name: started_time
+                  value: 13:00:00 ADT
+              - column:
+                  name: creator_id
+                  value: a1c95505-04c6-49d3-a67d-cdc7320400bc
+        - insert:
+            tableName: events
+            columns:
+              - column:
+                  name: title
+                  value: Случайное танго
+              - column:
+                  name: volunteer_amount
+                  value: 13
+              - column:
+                  name: place
+                  value: ФГБУ
+              - column:
+                  name: started_day
+                  valueDate: 2023-05-03
+              - column:
+                  name: ended_day
+                  valueDate: 2023-05-07
+              - column:
+                  name: started_time
+                  value: 13:00:00 ADT
+              - column:
+                  name: creator_id
+                  value: a1c95505-04c6-49d3-a67d-cdc7320400bc
+        - insert:
+            tableName: events
+            columns:
+              - column:
+                  name: title
+                  value: Спектакль "Серая шейка"
+              - column:
+                  name: volunteer_amount
+                  value: 3
+              - column:
+                  name: place
+                  value: Театр кукол
+              - column:
+                  name: started_day
+                  valueDate: 2023-05-03
+              - column:
+                  name: ended_day
+                  valueDate: 2023-05-07
+              - column:
+                  name: started_time
+                  value: 13:00:00 ADT
+              - column:
+                  name: creator_id
+                  value: a1c95505-04c6-49d3-a67d-cdc7320400bc

@@ -17,12 +17,12 @@ import java.util.List;
 public class EventController {
     private final EventService eventService;
 
-    @GetMapping
+    @GetMapping(produces = "application/json; charset=UTF-8")
     public ResponseEntity<List<EventResponse>> getAllEvents(){
         return ResponseEntity.ok(eventService.getAllEvents());
     }
 
-    @GetMapping("/{event_id}")
+    @GetMapping(value = "/{event_id}",produces = "application/json; charset=UTF-8")
     public ResponseEntity<EventResponse> getEventById(@PathVariable("event_id") Integer id){
         return ResponseEntity.ok(eventService.getEventById(id));
     }

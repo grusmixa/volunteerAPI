@@ -11,6 +11,7 @@ import java.util.List;
 public record EventResponse(Integer id,
                            String title,
                            Integer volunteerAmount,
+                           String place,
                            List<TaskGeneral> tasks,
                            Date startedDay,
                            Date endedDay,

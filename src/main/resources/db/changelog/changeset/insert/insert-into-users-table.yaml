@@ -20,7 +20,7 @@ databaseChangeLog:
                   value: Grushe
               - column:
                   name: password
-                  value: admin
+                  value: $2a$10$1.T7wjAmaRuC6LGJszdExeBkKDeKSIgDgSu0Umo.q/O2ONOBPy4Cm
               - column:
                   name: role
                   value: ADMIN
@@ -60,7 +60,7 @@ databaseChangeLog:
                   value: Susli
               - column:
                   name: password
-                  value: user
+                  value: $2a$10$tObVQzS3xj0AYn9SOKYnXOHROeKkCRIvqQnXwV9cXkzVnYvjLjRMK
               - column:
                   name: role
                   value: USER
@@ -82,3 +82,43 @@ databaseChangeLog:
               - column:
                   name: sex
                   value: FEMALE
+
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  value: a2ec385f-ef88-4525-a319-0d51f1f6ae3b
+              - column:
+                  name: first_name
+                  value: Сергей
+              - column:
+                  name: second_name
+                  value: Грушенков
+              - column:
+                  name: login
+                  value: Sergey
+              - column:
+                  name: password
+                  value: $2a$10$1.T7wjAmaRuC6LGJszdExeBkKDeKSIgDgSu0Umo.q/O2ONOBPy4Cm
+              - column:
+                  name: role
+                  value: ADMIN
+              - column:
+                  name: phone
+                  value: +7(997)-777-77-77
+              - column:
+                  name: email
+                  value: grushenkovmikhail@gmail.com
+              - column:
+                  name: experience
+                  value: No
+              - column:
+                  name: languages
+                  value: Russian, English
+              - column:
+                  name: education
+                  value: Samara University
+              - column:
+                  name: sex
+                  value: MALE
