@@ -24,3 +24,12 @@ If you do this, you build image, but withour PostgreSQL it now run, all environm
 
 ### 4.Feedback
 #### My email ildarthegreat@gmail.com
+
+```properties
+spring_profiles_active=prod
+PROD_DB_HOST=HOST_HERE
+PROD_DB_PORT=POST_HERE
+PROD_DB_NAME=railway
+PROD_DB_PASSWORD=PASSWORD_HERE
+PROD_DB_USERNAME=postgres
+```

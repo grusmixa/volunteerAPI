@@ -1,16 +1,10 @@
 spring:
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://ildar-postgresql.udb:5432/ildar
-    username: ildar
-    password: z5wRr84N8X7ygA
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
+  profiles:
+    active: dev
+
 application:
   auth:
     cookie-name: volunteerJWT
     jwt-secret: volunteerSecretKey
     jwt-expiration-time: 99999h
+
