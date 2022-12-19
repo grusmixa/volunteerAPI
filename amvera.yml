@@ -8,5 +8,5 @@ build:
   args: spring-boot:repackage -Pproduction
 
 run:
-  jarName: target/volunteerAPI-0.0.1.jar
+  jarName: volunteerAPI-0.0.1.jar
   containerPort: 8080
