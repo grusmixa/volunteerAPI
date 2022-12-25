@@ -49,6 +49,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserResponse returnUser() {
+        String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByLogin(userLogin);
+        if (user == null) {
+            throw new NotFoundException("Пользователь с логином: " + userLogin + " не найден");
+        }
+        log.info("Пользователь {} просматривает свои данные.", userLogin);
+        return userMapper.toResponse(user);
+    }
+
+    @Override
     public LoginResponse register(UserRequest userRequest) {
         log.info("Попытка регистрации аккаунта {}.", userRequest.login());
         User user = userMapper.toEntity(userRequest);

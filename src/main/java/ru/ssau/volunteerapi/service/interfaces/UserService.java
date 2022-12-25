@@ -21,4 +21,6 @@ public interface UserService {
     LoginResponse login(LoginRequest loginRequest);
 
     User findUserLogin(String login);
+
+    UserResponse returnUser();
 }

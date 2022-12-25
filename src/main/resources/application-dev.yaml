@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://ildar-postgresql.udb:5432/ildar
-    username: ildar
-    password: z5wRr84N8X7ygA
+    url: jdbc:postgresql://localhost:6541/volunteerAPI
+    username: root
+    password: root
   jpa:
     properties:
       hibernate:
