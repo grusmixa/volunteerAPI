@@ -4,7 +4,6 @@ import ru.ssau.volunteerapi.model.entitie.Sex;
 
 public record UserPatch(String firstName,
                         String secondName,
-                        String password,
                         String phone,
                         String email,
                         String experience,
