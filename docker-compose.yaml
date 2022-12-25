@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   web:
-    image: ildarthegreat/volunteerapi:1.0
+    image: ildarthegreat/volunteerapi:1.5
     container_name: volunteerServer
     ports:
       - "8080:8080"
